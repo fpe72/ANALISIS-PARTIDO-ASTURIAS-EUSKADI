@@ -155,16 +155,16 @@ const MatchOverview = ({ data }: { data: typeof MOCK_MATCH_DATA }) => {
            <div className="space-y-4 text-sm">
               <div className="p-3 bg-slate-950 rounded-lg border-l-2 border-emerald-500">
                 <p className="text-slate-400 text-xs uppercase mb-1">Estilo de Juego</p>
-                <p className="text-slate-200">{data.teamAnalysis.style}</p>
+                <p className="text-slate-200">{analysisContent.teamDNA.style}</p>
               </div>
               <div className="p-3 bg-slate-950 rounded-lg border-l-2 border-blue-500">
                 <p className="text-slate-400 text-xs uppercase mb-1">Organización Defensiva</p>
-                <p className="text-slate-200">{data.teamAnalysis.defense}</p>
+                <p className="text-slate-200">{analysisContent.teamDNA.defense}</p>
               </div>
               <div>
                 <p className="text-slate-400 text-xs uppercase mb-2">Puntos Fuertes</p>
                 <div className="flex flex-wrap gap-2">
-                  {data.teamAnalysis.strengths.map((s, i) => (
+                  {analysisContent.teamDNA.strengths.map((s, i) => (
                     <span key={i} className="px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded text-xs border border-emerald-500/20">{s}</span>
                   ))}
                 </div>
@@ -172,7 +172,7 @@ const MatchOverview = ({ data }: { data: typeof MOCK_MATCH_DATA }) => {
               <div>
                 <p className="text-slate-400 text-xs uppercase mb-2">Debilidades Clave</p>
                 <div className="flex flex-col gap-2">
-                  {data.teamAnalysis.weaknesses.map((s, i) => (
+                  {analysisContent.teamDNA.weaknesses.map((s, i) => (
                     <span key={i} className="px-2 py-1 bg-red-500/10 text-red-400 rounded text-xs border border-red-500/20">{s}</span>
                   ))}
                 </div>
