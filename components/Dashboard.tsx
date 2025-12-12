@@ -30,6 +30,8 @@ import {
 } from 'recharts';
 import { MOCK_MATCH_DATA } from '../constants';
 import { PlayerStats } from '../types';
+import { analysisContent } from '../content/analysis';
+
 
 // --- Helper Components ---
 
@@ -650,12 +652,15 @@ export default function Dashboard() {
           <header className="flex justify-between items-center mb-8">
              <div>
                <h1 className="text-2xl font-bold text-white flex items-center space-x-2">
-                 <span>{data.meta.competition}</span>
-               </h1>
-               <p className="text-slate-500 text-sm mt-1 flex items-center space-x-2">
+                  <span>{analysisContent.title}</span>
+                </h1>
+                <p className="text-slate-500 text-sm mt-1 flex items-center space-x-2">
                   <Map size={14} />
-                  <span>Análisis Post-Partido • {data.meta.date}</span>
-               </p>
+                  <span>
+                    {data.meta.competition} • {data.meta.date} • Actualizado: {analysisContent.updatedAtISO}
+                  </span>
+                </p>
+
              </div>
              <div className="hidden md:block">
                 <div className="bg-emerald-500/10 text-emerald-400 px-4 py-2 rounded-full border border-emerald-500/20 flex items-center space-x-2 text-sm font-medium animate-pulse">
