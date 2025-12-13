@@ -37,7 +37,7 @@ export const MOCK_MATCH_DATA: MatchData = {
     {
       id: 'p1',
       name: 'Sofía Palacios',
-      number: 4,
+      number: 6,
       position: 'Pivote Defensivo (MCD)',
       minutesPlayed: 96,
       rating: 7.8, // Calificación basada en volumen defensivo
