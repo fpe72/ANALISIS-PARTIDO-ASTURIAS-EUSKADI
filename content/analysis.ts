@@ -16,7 +16,7 @@ export type AnalysisContent = {
 };
 
 export const analysisContent: AnalysisContent = {
-  title: "Análisis del partido (PR test)",
+  title: "Análisis del partido",
   updatedAtISO: "2025-12-13",
   sections: [
     {
