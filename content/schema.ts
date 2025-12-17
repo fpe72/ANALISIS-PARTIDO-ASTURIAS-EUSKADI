@@ -4,6 +4,7 @@ export type AnalysisContent = {
   title: string;
   updatedAtISO: string;
   sections: Array<{
+    id: string;
     heading: string;
     body: string;
   }>;
