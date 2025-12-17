@@ -181,32 +181,56 @@ const MatchOverview = ({ data }: { data: typeof MOCK_MATCH_DATA }) => {
         </div>
       </div>
       
-      {/* Event Timeline */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
-         <SectionHeader title="Línea de Tiempo" />
-         <div className="relative mt-8 pb-4">
-            <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-800 -translate-y-1/2"></div>
-            <div className="flex justify-between items-center relative z-10 px-4">
-              {data.events.map((event, idx) => (
-                <div key={idx} className="flex flex-col items-center group cursor-pointer" style={{ marginLeft: `${(event.minute / 95) * 10}%` }}>
-                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-transform transform group-hover:scale-125
-                      ${event.team === 'home' ? 'bg-emerald-500 border-emerald-300 text-white' : 'bg-slate-700 border-slate-500 text-slate-300'}
-                   `}>
-                     {event.minute}'
-                   </div>
-                   <div className="absolute top-10 w-32 text-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-800 p-2 rounded text-xs border border-slate-700 pointer-events-none z-20">
-                     <p className="font-bold text-white uppercase">{event.type}</p>
-                     <p className="text-slate-400">{event.description}</p>
-                   </div>
-                </div>
-              ))}
+         {/* Event Timeline */}
+          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+            <SectionHeader title="Línea de Tiempo" />
+            <div className="relative mt-8 pb-4">
+              <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-800 -translate-y-1/2"></div>
+              <div className="flex justify-between items-center relative z-10 px-4">
+                {data.events.map((event, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col items-center group cursor-pointer"
+                    style={{ marginLeft: `${(event.minute / 95) * 10}%` }}
+                  >
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-transform transform group-hover:scale-125
+                        ${event.team === 'home'
+                          ? 'bg-emerald-500 border-emerald-300 text-white'
+                          : 'bg-slate-700 border-slate-500 text-slate-300'}
+                      `}
+                    >
+                      {event.minute}'
+                    </div>
+    
+                    <div className="absolute top-10 w-32 text-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-800 p-2 rounded text-xs border border-slate-700 pointer-events-none z-20">
+                      <p className="font-bold text-white uppercase">{event.type}</p>
+                      <p className="text-slate-400">{event.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-         </div>
+          </div>
+
+      {/* Texto de Análisis (anchors por sección) */}
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <SectionHeader title="Análisis (texto)" subtitle="Secciones editables con anclas" />
+        <div className="space-y-6">
+          {analysisContent.sections.map((section) => (
+            <section key={section.id} id={section.id} className="scroll-mt-24">
+              <h3 className="text-lg font-bold text-white mb-2">{section.heading}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                {section.body}
+              </p>
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
-
+   
 const HeatmapVisual = ({ data }: { data: number[][] }) => {
   const maxVal = Math.max(...data.flat());
   
