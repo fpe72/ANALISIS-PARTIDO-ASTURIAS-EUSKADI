@@ -227,7 +227,31 @@ const MatchOverview = ({ data }: { data: typeof MOCK_MATCH_DATA }) => {
           ))}
         </div>
       </div>
-    </div>
+      
+          {/* Texto de Análisis (anchors por sección) */}
+          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+            <SectionHeader
+              title="Análisis (texto)"
+              subtitle="Secciones editables con anclas"
+            />
+    
+            <div className="space-y-6">
+              {analysisContent.sections.map((section) => (
+                <section
+                  key={section.id}
+                  id={section.id}
+                  className="scroll-mt-24"
+                >
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    {section.heading}
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+                    {section.body}
+                  </p>
+                </section>
+              ))}
+            </div>
+          </div>
   );
 };
    
