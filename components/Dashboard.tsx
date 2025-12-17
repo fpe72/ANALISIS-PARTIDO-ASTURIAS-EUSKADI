@@ -515,7 +515,11 @@ const ShareModal = ({ isOpen, onClose, url }: { isOpen: boolean, onClose: () => 
   );
 };
 
+
+
 // --- Main Layout ---
+
+const LS_SELECTED_MATCH_KEY = "fap:selectedMatchKey";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'p1' | 'p2' | 'compare'>('overview');
@@ -526,8 +530,25 @@ export default function Dashboard() {
 
   // ⬇️ C2.2: selector partido
   const matchKeys = useMemo(() => Object.keys(MATCHES ?? {}), []);
-  const initialMatchKey = (DEFAULT_MATCH && (MATCHES as any)?.[DEFAULT_MATCH]) ? DEFAULT_MATCH : (matchKeys[0] ?? DEFAULT_MATCH ?? 'default');
+
+  const initialMatchKey = useMemo(() => {
+    const fallback =
+      (DEFAULT_MATCH && (MATCHES as any)?.[DEFAULT_MATCH])
+        ? DEFAULT_MATCH
+        : (matchKeys[0] ?? DEFAULT_MATCH ?? 'default');
+  
+    try {
+      const saved = localStorage.getItem(LS_SELECTED_MATCH_KEY);
+      if (saved && (MATCHES as any)?.[saved]) return saved;
+    } catch {
+      // si localStorage falla, seguimos con fallback
+    }
+  
+    return fallback;
+  }, [matchKeys]);
+  
   const [selectedMatchKey, setSelectedMatchKey] = useState<string>(initialMatchKey);
+
 
   // Bundle partido seleccionado (estructura flexible)
   const selectedBundle: any = (MATCHES as any)?.[selectedMatchKey] ?? (MATCHES as any)?.[initialMatchKey] ?? {};
@@ -559,6 +580,15 @@ export default function Dashboard() {
       }
     }
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_SELECTED_MATCH_KEY, selectedMatchKey);
+    } catch {
+      // Si localStorage falla, no rompemos el dashboard
+    }
+  }, [selectedMatchKey]);
+
 
   const handleExport = () => {
     setIsExporting(true);
